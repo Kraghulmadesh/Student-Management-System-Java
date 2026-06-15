@@ -1,82 +1,118 @@
 import java.util.*;
-import java.io.*;
 
-class Addstudent{
+class AddStudent {
     int id;
     String name;
     int age;
-    String DateofBirth;
+    String dateOfBirth;
 }
-class main{
-    public static void main(String args[]){
+
+public class Main {
+    public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
-        ArrayList<Addstudent> student = new ArrayList<>(); 
-        System.out.println("-----Student Management System-----");
-        while(true){
-            System.out.println("1) -----Add New Student-----");
-            System.out.println("2) -----View Student Detail-----");
-            System.out.println("3) -----Delete the student detail-----");
-            System.out.println("4) -----Exit-----");
-            System.out.println("Enter the Method:");
+        ArrayList<AddStudent> students = new ArrayList<>();
+
+        System.out.println("----- Student Management System -----");
+
+        while (true) {
+
+            System.out.println("\n1) Add New Student");
+            System.out.println("2) View Student Detail");
+            System.out.println("3) Delete Student Detail");
+            System.out.println("4) Exit");
+            System.out.print("Enter the Method: ");
+
             int n = sc.nextInt();
             sc.nextLine();
-            switch(n){
-            case 1:
-                Addstudent addstu = new Addstudent();
-                System.out.println("Enter a Student ID:");
-                addstu.id = sc.nextInt();
-                sc.nextLine();
-                System.out.println("Enter a Student Name:");
-                addstu.name = sc.nextLine();
-                System.out.println("Enter a Student Age:");
-                addstu.age = sc.nextInt();
-                sc.nextLine();
-                System.out.println("Enter a Date of Birth:");
-                addstu.DateofBirth = sc.nextLine();
-                student.add(addstu);
-                System.out.println("Successfully Added");
-                break;
-            case 2:
-                int search;
-                boolean flag = false;
-                System.out.println("Enter Student ID:" );
-                search = sc.nextInt();
-                sc.nextLine();
-                int length = student.size();
-                for(int i = 0; i < length; i++){
-                      if(student.get(i).id == search){
-                        flag = true;
 
-                        System.out.println("-----Student Detail-----:");
-                        System.out.println("ID: " + student.get(i).id);
-                        System.out.println("Name: " + student.get(i).name);
-                        System.out.println("Age: " + student.get(i).age);
-                        System.out.println("DOB: " + student.get(i).DateofBirth);
+            switch (n) {
 
-                        break;
+                case 1:
+                    AddStudent addStu = new AddStudent();
+
+                    System.out.print("Enter Student ID: ");
+                    addStu.id = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter Student Name: ");
+                    addStu.name = sc.nextLine();
+
+                    System.out.print("Enter Student Age: ");
+                    addStu.age = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter Date of Birth: ");
+                    addStu.dateOfBirth = sc.nextLine();
+
+                    students.add(addStu);
+
+                    System.out.println("Student Added Successfully!");
+                    break;
+
+                case 2:
+                    boolean flag = false;
+
+                    System.out.print("Enter Student ID: ");
+                    int search = sc.nextInt();
+                    sc.nextLine();
+
+                    for (int i = 0; i < students.size(); i++) {
+
+                        if (students.get(i).id == search) {
+
+                            flag = true;
+
+                            System.out.println("\n----- Student Detail -----");
+                            System.out.println("ID: " + students.get(i).id);
+                            System.out.println("Name: " + students.get(i).name);
+                            System.out.println("Age: " + students.get(i).age);
+                            System.out.println("DOB: " + students.get(i).dateOfBirth);
+
+                            break;
+                        }
                     }
-                }
 
-                if(!flag){
-                    System.out.println("Student does not found in this id: " + search);
-                }
-                break;
-            case 3:
-                boolean found = false;
-                System.out.println("Enter a student id to delete the student detail:");
-                int delid = sc.nextInt();
-                sc.nextLine();
-                for(int i = 0; i < student.size(); i++){
-                    if(student.get(i).id == delid){
-                        student.remove(i);
-                        found = true;
-                        System.out.println("Student deleted successfully");
-                        break;
+                    if (!flag) {
+                        System.out.println("Student not found with ID: " + search);
                     }
-                }
-                if(!found){
-                    System.out.println("No ID Found");
-                }
-                break;
+
+                    break;
+
+                case 3:
+                    boolean found = false;
+
+                    System.out.print("Enter Student ID to delete: ");
+                    int delId = sc.nextInt();
+                    sc.nextLine();
+
+                    for (int i = 0; i < students.size(); i++) {
+
+                        if (students.get(i).id == delId) {
+
+                            students.remove(i);
+                            found = true;
+
+                            System.out.println("Student deleted successfully!");
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("No ID Found");
+                    }
+
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    sc.close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Please Enter a Valid Method");
+            }
+        }
     }
 }
